@@ -77,6 +77,53 @@ class DBModelView: ObservableObject{
         }
     }
     
+    /// <#Description#>
+    /// - Returns: <#description#>
+    func getWord() -> String{
+        var wordArray: [String] = [] //登録されている単語を一式格納用の配列
+        var selectedWord: String? //取得する要素
+        let realm = try! Realm()
+        let result = realm.objects(RecordWordListModel.self) //データを取得
+
+        if result.count == 0{
+            selectedWord = ""
+        }else{
+            for i in 0..<result.count{
+                wordArray.append(result[i].recordWord)
+            }
+            selectedWord = wordArray.randomElement()
+        }
+        return selectedWord! as String
+    }
+    
+    func getMemo(word: String) -> String{
+        var wordArray: [String] = []
+        var memoArray: [String] = []
+        let questionWord = word
+        var memo: String?
+        let realm = try! Realm()
+        let result = realm.objects(RecordWordListModel.self) //データを取得
+        
+        if result.count == 0{
+            memo = ""
+        }else{
+            for i in 0..<result.count{
+                wordArray.append(result[i].recordWord)
+                memoArray.append(result[i].memo)
+            }
+        }
+        print(wordArray)
+        print(memoArray)
+        if let firstIndex = wordArray.index(of: questionWord){
+            print(firstIndex)
+            print(questionWord)
+            memo = memoArray[firstIndex]
+        }
+        
+        return memo! as String
+        
+    }
+    
     func addTestResults(){
         let testResultLiatModel = TestResultLiatModel()
         testResultLiatModel.incorrectAnswerWord = recordWord

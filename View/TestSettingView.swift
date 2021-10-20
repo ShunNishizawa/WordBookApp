@@ -14,73 +14,73 @@ struct TestSettingView: View {
     @State var checkFlg: Bool = false //出題数チェックフラグ
     @State private var toTestView = false //TestViewへの切り替えフラグ
     @State private var showAlert = false //アラート出力フラグ
+    var originalNumberOfQuestions = 0
     
     var body: some View {
-        NavigationView{
-            VStack{
-                Group{
-                    if checkNumbersOfRecordWords(numbersOfRecordWords: numberOfRecordedWords){
-                        HStack{
-                            Text("登録単語数")
-                            Text("\(numberOfRecordedWords)")
-                        }
-                    }else{
-                        Text("単語が1つも登録されていません。")
-                            .foregroundColor(.red)
-                            .font(.headline)
+        VStack{
+            Group{
+                if checkNumbersOfRecordWords(numbersOfRecordWords: numberOfRecordedWords){
+                    HStack{
+                        Text("登録単語数")
+                        Text("\(numberOfRecordedWords)")
                     }
-                }
-                .frame(width: 300, height: 30)
-                
-                HStack{
-                    Text("出題数")
-                    TextField("出題数入力", value: $numberOfQuestions, formatter: NumberFormatter())
-                        .padding()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
-                        .onChange(of: numberOfQuestions, perform: { questions in
-                            numberOfQuestions = questions
-                        })
-                }
-                
-                Button(action:{
-                    if checknumberOfQuestions(numberOfQuestions: self.numberOfQuestions, numberOfRecordWords: self.numberOfRecordedWords){
-                        self.showAlert = true
-                        checkFlg = true
-                    }else{
-                        checkFlg = false
-                    }
-                }){
-                    LottieView(name: "33002-start-button", loopMode: .playOnce)
-                        .frame(width: 250, height: 250)
-                }
-                
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text(""), message: Text("テストを開始しますか?"), primaryButton: .default(Text("はい"), action: {
-                        self.toTestView = true
-                    }), secondaryButton: .default(Text("いいえ")))
-                }
-                
-                NavigationLink(destination: TestStart(numberOfQuestions: numberOfQuestions), isActive: $toTestView){
-                    EmptyView()
-                }
-                
-                //テスト開始か否かを判定
-                if checkFlg == true{
-                    Text("")
                 }else{
-                    Text("出題数が0または登録単語数を超えています。")
+                    Text("単語が1つも登録されていません。")
                         .foregroundColor(.red)
+                        .font(.headline)
                 }
             }
+            .frame(width: 300, height: 30)
             
-            Color.black
-                .opacity(0.4)
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture {
-                    UIApplication.shared.closeKeyboardTest()
+            HStack{
+                Text("出題数")
+                TextField("出題数入力", value: $numberOfQuestions, formatter: NumberFormatter())
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)
+                    .onChange(of: numberOfQuestions, perform: { questions in
+                        numberOfQuestions = questions
+                    })
+            }
+            
+            Button(action:{
+                if checknumberOfQuestions(numberOfQuestions: self.numberOfQuestions, numberOfRecordWords: self.numberOfRecordedWords){
+                    self.showAlert = true
+                    checkFlg = true
+                }else{
+                    checkFlg = false
                 }
-        } .navigationBarBackButtonHidden(true)
+            }){
+                LottieView(name: "33002-start-button", loopMode: .playOnce)
+                    .frame(width: 250, height: 250)
+            }
+            
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(""), message: Text("テストを開始しますか?"), primaryButton: .default(Text("はい"), action: {
+                    self.toTestView = true
+                }), secondaryButton: .default(Text("いいえ")))
+            }
+            
+            NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions), isActive: $toTestView){
+                EmptyView()
+            }
+            
+            //テスト開始か否かを判定
+            if checkFlg == true{
+                Text("")
+            }else{
+                Text("出題数が0または登録単語数を超えています。")
+                    .foregroundColor(.red)
+            }
+        }
+        
+        Color.black
+            .opacity(0.4)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+                UIApplication.shared.closeKeyboardTest()
+            }
+            .navigationBarBackButtonHidden(true)
     }
 }
 
