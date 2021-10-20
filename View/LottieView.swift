@@ -2,7 +2,7 @@
 //  LottieView.swift
 //  WordBookApp
 //
-//  Created by 西澤駿 on 2021/09/28.
+//  Created by 西澤駿 on 2021/10/09.
 //
 
 import Foundation
@@ -13,6 +13,7 @@ struct LottieView: UIViewRepresentable {
     var name: String
     var loopMode: LottieLoopMode = .playOnce
     var animationView = AnimationView()
+    
     
     func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
         let view = UIView(frame: .zero)

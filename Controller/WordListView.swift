@@ -28,7 +28,6 @@ struct WordListView: View {
                                     Text(word.recordWord)
                                 })
                         }
-                        //.onDelete(perform: dbModelView.deleteData)
                     }
                 }
                 PlusButton()

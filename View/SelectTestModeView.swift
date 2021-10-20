@@ -30,6 +30,7 @@ struct SelectTestModeView: View {
                         Text("テスト結果確認")
                     })
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

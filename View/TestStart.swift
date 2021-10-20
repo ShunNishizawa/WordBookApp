@@ -18,7 +18,7 @@ struct TestStart: View {
         NavigationView{
             ZStack(alignment: .center) {
                 if (show) {
-                    SplashAnimationView(show: $show)
+                    AnimatedView(show: $show, lottieFileName: "CountDown321")
                         .frame(width: 120, height: 120)
                 } else {
                     TestView(numberOfQuestions: numberOfQuestions)
@@ -28,24 +28,3 @@ struct TestStart: View {
     }
 }
 
-struct SplashAnimationView: UIViewRepresentable {
-    
-    @Binding var show: Bool
-    
-    func makeUIView(context: Context) -> some AnimationView {
-        let view = AnimationView(name: "CountDwon321", bundle: Bundle.main)
-        // lottie animationを表示開始
-        view.play { (status) in
-            if status {
-                withAnimation(.spring()) {
-                    // 表示が終了したタイミングで表示フラグをOFFに
-                    show = false
-                }
-            }
-        }
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
-}
