@@ -19,8 +19,8 @@ struct AnswerView: View {
     
     var body: some View {
         VStack{
-            let realm = try! Realm()
-            let results = realm.objects(RecordWordListModel.self).filter("recordWord = '\(questionWord)'")
+//            let realm = try! Realm()
+//            let results = realm.objects(RecordWordListModel.self).filter("recordWord = '\(questionWord)'")
             
             Text(dbModelView.getMemo(word: questionWord))
             
@@ -35,12 +35,23 @@ struct AnswerView: View {
                         toTestView = true
                     }
                 }){
-                    Text("正解")
+                    Image("seikai")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120.0, height: 120.0, alignment: .leading)
+                        .overlay(
+                            Text("")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.red))
                 }
                 
                 Button(action:{
                     numberOfQuestions = numberOfQuestions - 1
                     self.score.incorrectAnswer += 1
+                    dbModelView.recordWord = questionWord
+                    dbModelView.testDate = Date()
+                    dbModelView.addTestResults()
                     
                     if numberOfQuestions == 0{
                         toResultView = true
@@ -48,7 +59,15 @@ struct AnswerView: View {
                         toTestView = true
                     }
                 }){
-                    Text("不正解")
+                    Image("huseikai2")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 120.0, height: 120.0, alignment: .leading)
+                        .overlay(
+                            Text("")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.red))
                 }
             }
             
@@ -69,7 +88,14 @@ struct AnswerView: View {
 class Score: ObservableObject {
     private init() { }
         
-        static let shared = Score()
+    static let shared = Score()
     @Published var correctAnswer = 0
     @Published var incorrectAnswer = 0
+}
+
+//不正解単語を保持する
+class IncorrectAnswerWord: ObservableObject{
+    private init(){}
+    
+    
 }

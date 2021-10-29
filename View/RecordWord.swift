@@ -42,7 +42,7 @@ struct RecordWord: View {
                     }
                 
                     HStack{
-                        Text("メモ")
+                        Text("解説")
                             .frame(width: 40, height: 30, alignment: .leading)
                         TextEditor(text: $dbModelView.memo)
                             .frame(width: 300, height: 400, alignment: .leading)

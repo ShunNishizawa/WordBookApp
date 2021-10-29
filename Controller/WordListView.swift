@@ -37,6 +37,7 @@ struct WordListView: View {
     }
 }
 
+
 struct WordList_Previews: PreviewProvider {
     static var previews: some View {
         WordListView()

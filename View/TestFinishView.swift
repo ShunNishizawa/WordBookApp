@@ -11,6 +11,7 @@ struct TestFinishView: View {
     //@EnvironmentObject var score: Score
     @ObservedObject var score: Score = .shared
     @State private var toSelectedView = false
+    @State private var toConfirmationView = false
     
     var body: some View {
         VStack{
@@ -34,16 +35,18 @@ struct TestFinishView: View {
                 Text("\(score.incorrectAnswer)問")
             }
             
-            Button(action: {
-                toSelectedView.toggle()
-            }){
-                Text("終了")
-            }
-            
-            NavigationLink(destination: SelectTestModeView(), isActive: $toSelectedView){
-                EmptyView()
-                    .navigationBarBackButtonHidden(true)
-            }
+//            NavigationLink {
+//                ConfirmationView()
+//            } label: {
+//                Text("不正解単語確認")
+//            }
+//
+//            
+//            NavigationLink {
+//                TestSettingView()
+//            } label: {
+//                Text("トップへ")
+//            }
         }
         .navigationBarBackButtonHidden(true)
     }
