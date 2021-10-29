@@ -28,12 +28,11 @@ struct WordDetailView: View {
                                 TextField("", text: $word)
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
                                     .padding()
-                                Spacer()
                             }
                             
                             //メモ編集
                             HStack{
-                                Text("メモ：")
+                                Text("解説：")
                                 TextEditor(text: $memo)
                                     .frame(width: 300, height: 400, alignment: .leading)
                                     .border(Color.white)
@@ -44,18 +43,16 @@ struct WordDetailView: View {
                     }else{
                         Text(word)
                             .font(.title)
-                        Spacer()
                         HStack{
-                            Text("メモ：")
+                            Text("解説：")
                             Text(memo)
                         }
-                        Spacer()
                     }
                     
-                    HStack{
-                        Text("テスト不正解数：")
-                        Text(String(numberOfIncorrectAnswers))
-                    }
+//                    HStack{
+//                        Text("テスト不正解数：")
+//                        Text(String(numberOfIncorrectAnswers))
+//                    }
                     Spacer()
                 }
             }

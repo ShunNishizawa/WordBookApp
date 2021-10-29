@@ -15,7 +15,7 @@ struct MailView: UIViewControllerRepresentable {
         let controller = MFMailComposeViewController()
         controller.mailComposeDelegate = context.coordinator
         controller.setSubject("件名")
-        controller.setToRecipients(["land.sea1996@gmail.com"])
+        controller.setToRecipients(["nishizawa.shun.819@gmail.com"])
         controller.setMessageBody("改善点や要望をお書きください。", isHTML: false)
         return controller
     }

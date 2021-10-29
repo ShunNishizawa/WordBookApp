@@ -77,8 +77,8 @@ class DBModelView: ObservableObject{
         }
     }
     
-    /// <#Description#>
-    /// - Returns: <#description#>
+    /// 出題単語をランダムに取得する
+    /// - Returns: 出題単語
     func getWord() -> String{
         var wordArray: [String] = [] //登録されている単語を一式格納用の配列
         var selectedWord: String? //取得する要素
@@ -91,14 +91,24 @@ class DBModelView: ObservableObject{
             for i in 0..<result.count{
                 wordArray.append(result[i].recordWord)
             }
+            
             selectedWord = wordArray.randomElement()
+            var newSelectedWord = "" //一時的に次の単語を格納
+            
+            //前回の結果と異なるまで繰り返す
+            repeat{
+                newSelectedWord = wordArray.randomElement()!
+            }while selectedWord == newSelectedWord
         }
         return selectedWord! as String
     }
     
+    /// 解答表示用メモの取得
+    /// - Parameter word: 出題単語
+    /// - Returns: 解答表示用メモ
     func getMemo(word: String) -> String{
-        var wordArray: [String] = []
-        var memoArray: [String] = []
+        var wordArray: [String] = [] //登録単語格納配列
+        var memoArray: [String] = [] //メモ格納配列
         let questionWord = word
         var memo: String?
         let realm = try! Realm()
@@ -112,16 +122,11 @@ class DBModelView: ObservableObject{
                 memoArray.append(result[i].memo)
             }
         }
-        print(wordArray)
-        print(memoArray)
+        
         if let firstIndex = wordArray.index(of: questionWord){
-            print(firstIndex)
-            print(questionWord)
             memo = memoArray[firstIndex]
         }
-        
         return memo! as String
-        
     }
     
     func addTestResults(){

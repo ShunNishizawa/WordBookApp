@@ -18,11 +18,13 @@ struct TestView: View {
     
     var body: some View {
             VStack(alignment: .center){
+                
                 Image("WordCard")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 400.0, height: 400.0, alignment: .leading)
-                    .overlay(Text(questionWord)
+                    .overlay(
+                        Text(questionWord)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .foregroundColor(.red))
