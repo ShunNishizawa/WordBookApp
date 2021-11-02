@@ -38,9 +38,6 @@ struct TestSettingView: View {
                     TextField("出題数入力", value: $numberOfQuestions, formatter: NumberFormatter())
                         .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    //                    .onChange(of: numberOfQuestions, perform: { questions in
-                    //                        numberOfQuestions = questions
-                    //                    })
                 }
                 
                 Button(action:{

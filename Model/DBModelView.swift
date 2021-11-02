@@ -41,7 +41,7 @@ class DBModelView: ObservableObject{
         try? dbRef.write{
             dbRef.add(recordWordListModel)
         }
-        fetchData()
+        //fetchData()
     }
     
     /// 単語削除処理

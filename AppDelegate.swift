@@ -8,14 +8,13 @@
 import UIKit
 import CoreData
 import RealmSwift
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         print("Realmファイルの場所確認")
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         return true

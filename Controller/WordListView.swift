@@ -29,10 +29,16 @@ struct WordListView: View {
                                 })
                         }
                     }
+                    
+                    Spacer()
+                    AdmobBannerView()
+                    
                 }
                 PlusButton()
                     .environmentObject(dbModelView)
-            }.navigationBarTitle("単語リスト")
+            }
+            .navigationBarTitle("単語リスト")
+            .navigationBarBackButtonHidden(true)
         }
     }
 }

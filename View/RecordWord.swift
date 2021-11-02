@@ -24,7 +24,7 @@ struct RecordWord: View {
         NavigationView{
             
             ZStack{
-                Color.black
+                Color.white
                     .opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
