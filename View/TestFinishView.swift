@@ -12,6 +12,7 @@ struct TestFinishView: View {
     @ObservedObject var score: Score = .shared
     @State private var toSelectedView = false
     @State private var toConfirmationView = false
+    @Binding var isTestSettingView: Bool
     
     var body: some View {
         VStack{
@@ -35,6 +36,11 @@ struct TestFinishView: View {
                 Text("\(score.incorrectAnswer)問")
             }
             
+            Button(action: {
+                self.isTestSettingView = false
+            }, label: {
+                Text("トップへ")
+            })
 //            NavigationLink {
 //                ConfirmationView()
 //            } label: {

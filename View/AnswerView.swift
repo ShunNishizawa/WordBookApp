@@ -16,6 +16,7 @@ struct AnswerView: View {
     //@EnvironmentObject var score: Score
     @ObservedObject var score: Score = .shared
     @StateObject var dbModelView = DBModelView()
+    @Binding var isTestSettingView: Bool
     
     var body: some View {
         VStack{
@@ -71,11 +72,11 @@ struct AnswerView: View {
                 }
             }
             
-            NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions), isActive: $toTestView){
+            NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions, isTestSettingViewActive: $isTestSettingView), isActive: $toTestView){
                 EmptyView()
             }
             
-            NavigationLink(destination: TestFinishView(), isActive: $toResultView){
+            NavigationLink(destination: TestFinishView(isTestSettingView: $isTestSettingView), isActive: $toResultView){
                 EmptyView()
             }
         }

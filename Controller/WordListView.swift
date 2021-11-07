@@ -11,6 +11,7 @@ import RealmSwift
 struct WordListView: View {
     @State private var searchText: String = ""
     @StateObject var dbModelView = DBModelView()
+    @State private var isActive = false
     
     var body: some View {
         NavigationView {
@@ -21,19 +22,25 @@ struct WordListView: View {
                     //WordSearchBar(searchWordText: $searchText, placeholder: "SearchWord")
                     
                     List {
-                        ForEach(dbModelView.words) { word in
-                            NavigationLink(
-                                destination: WordDetailView(word: word.recordWord, memo: word.memo, numberOfIncorrectAnswers: word.numberOfIncorrectAnswers, presentWord: word.recordWord, presentMemo: word.memo),
-                                label: {
-                                    Text(word.recordWord)
-                                })
+                        if !dbModelView.words.isEmpty{
+                            
+                            ForEach(dbModelView.words) { word in
+                                NavigationLink(
+                                    destination: WordDetailView(word: word.recordWord, memo: word.memo, numberOfIncorrectAnswers: word.numberOfIncorrectAnswers, presentWord: word.recordWord, presentMemo: word.memo, isWordListViewActive: $isActive), isActive: $isActive){
+                                        Button(action:{
+                                            self.isActive = true
+                                        }){
+                                            Text(word.recordWord)
+                                        }
+                                    }
+                            }
                         }
                     }
                     
                     Spacer()
                     AdmobBannerView()
-                    
                 }
+                Spacer()
                 PlusButton()
                     .environmentObject(dbModelView)
             }
@@ -43,9 +50,9 @@ struct WordListView: View {
     }
 }
 
-
-struct WordList_Previews: PreviewProvider {
-    static var previews: some View {
-        WordListView()
-    }
-}
+//
+//struct WordList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WordListView()
+//    }
+//}

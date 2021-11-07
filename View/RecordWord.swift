@@ -20,6 +20,10 @@ struct RecordWord: View {
         return !dbModelView.recordWord.isEmpty
     }
     
+    init() {
+       UITextView.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         NavigationView{
             
@@ -36,8 +40,15 @@ struct RecordWord: View {
                         Text("単語")
                             .frame(width: 40, height: 30, alignment: .leading)
                         TextField("登録単語", text: $dbModelView.recordWord)
-                            .frame(width: 300, height: 100)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+//                            .frame(width: 300, height: 100)
+//                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .overlay(
+                                RoundedRectangle(cornerSize: CGSize(width: 8.0, height: 8.0))
+                                .stroke(Color.black, lineWidth: 1.0)
+                                .padding(-8.0)
+                        )
+                        .padding(16.0)
                         Spacer()
                     }
                 
@@ -46,9 +57,22 @@ struct RecordWord: View {
                             .frame(width: 40, height: 30, alignment: .leading)
                         TextEditor(text: $dbModelView.memo)
                             .frame(width: 300, height: 400, alignment: .leading)
-                            .border(Color.white)
+                            .border(Color.black, width: 1)
                             .lineSpacing(10.0)
                             .padding()
+                        
+                        //TODO: バージョンアップ時にUIの変更をする箇所
+//                        Image("WordCard")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 400.0, height: 400.0, alignment: .leading)
+//                            .overlay(
+//                                TextEditor(text: $dbModelView.memo)
+//                                    .frame(width: 300, height: 400, alignment: .leading)
+//                                    .border(Color.white)
+//                                    .lineSpacing(10.0)
+//                                    .padding()
+//                                )
                     }
                     
                     Button(action: {

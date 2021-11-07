@@ -12,8 +12,8 @@ struct TestSettingView: View {
     @State var numberOfQuestions:Int //質問数
     @State var numberOfRecordedWords:Int //登録単語数
     @State var checkFlg: Bool = false //出題数チェックフラグ
-    @State private var toTestView = false //TestViewへの切り替えフラグ
     @State private var showAlert = false //アラート出力フラグ
+    @State private var isActive = false //画面切り替えフラグ
     var originalNumberOfQuestions = 0
     
     var body: some View {
@@ -54,11 +54,11 @@ struct TestSettingView: View {
                 
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text("テストを開始しますか?"), primaryButton: .default(Text("はい"), action: {
-                        self.toTestView = true
+                        self.isActive = true
                     }), secondaryButton: .default(Text("いいえ")))
                 }
                 
-                NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions), isActive: $toTestView){
+                NavigationLink(destination: TestView(numberOfQuestions: numberOfQuestions, isTestSettingViewActive: $isActive), isActive: $isActive){
                     EmptyView()
                 }
                 
