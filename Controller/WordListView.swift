@@ -26,13 +26,16 @@ struct WordListView: View {
                             
                             ForEach(dbModelView.words) { word in
                                 NavigationLink(
-                                    destination: WordDetailView(word: word.recordWord, memo: word.memo, numberOfIncorrectAnswers: word.numberOfIncorrectAnswers, presentWord: word.recordWord, presentMemo: word.memo, isWordListViewActive: $isActive), isActive: $isActive){
-                                        Button(action:{
-                                            self.isActive = true
-                                        }){
-                                            Text(word.recordWord)
-                                        }
-                                    }
+                                    destination: WordDetailView(word: word.recordWord, memo: word.memo, numberOfIncorrectAnswers: word.numberOfIncorrectAnswers, presentWord: word.recordWord, presentMemo: word.memo, isWordListViewActive: $isActive), label: {
+                                        Text(word.recordWord)
+                                    })
+//                                {
+//                                        Button(action:{
+//                                            self.isActive = true
+//                                        }){
+//                                            Text(word.recordWord)
+//                                        }
+//                                    }
                             }
                         }
                     }

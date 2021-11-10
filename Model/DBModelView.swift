@@ -64,6 +64,7 @@ class DBModelView: ObservableObject{
     /// 単語削除処理
     /// - Parameter presentWord: 削除する単語
     func deleteData(deleteWord: String){
+        objectWillChange.send()
         
         let realm = try! Realm()
         let resultsDeleteWord = realm.objects(RecordWordListModel.self).filter("recordWord = '\(deleteWord)'")
