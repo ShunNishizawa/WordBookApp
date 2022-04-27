@@ -29,7 +29,7 @@ struct TestView: View {
                         Text(questionWord)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(.red))
+                                .foregroundColor(.black))
                 
                 NavigationLink(destination: AnswerView(numberOfQuestions: numberOfQuestions, questionWord: questionWord, isTestSettingView: $isTestSettingViewActive)) {
                     Text("解答確認")

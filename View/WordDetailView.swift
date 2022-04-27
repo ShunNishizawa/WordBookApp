@@ -68,17 +68,18 @@ struct WordDetailView: View {
             }
             .navigationBarItems(trailing: HStack{
                 WordEditButton(updateWord: word, updateMemo: memo, presentWord: presentWord, presentMemo: presentMemo)
-                Button(action:{
-                    isShowingAlert = true
-                }){
-                    Text("削除")
-                }
-                .alert(isPresented: $isShowingAlert){
-                    Alert(title: Text("確認"), message: Text("削除してもよろしいでしょうか？"), primaryButton: .cancel(Text("キャンセル")), secondaryButton: .default(Text("削除"), action: {
-                        dbModelView.deleteData(deleteWord: word)
-                        self.isWordListViewActive = false
-                    }))
-                }
+                //TODO: 削除機能を今後のアップデートで実装する
+//                Button(action:{
+//                    isShowingAlert = true
+//                }){
+//                    Text("削除")
+//                }
+//                .alert(isPresented: $isShowingAlert){
+//                    Alert(title: Text("確認"), message: Text("削除してもよろしいでしょうか？"), primaryButton: .cancel(Text("キャンセル")), secondaryButton: .default(Text("削除"), action: {
+//                        dbModelView.deleteData(deleteWord: word)
+//                        self.isWordListViewActive = false
+//                    }))
+//                }
             } )
         }
     }
