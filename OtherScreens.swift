@@ -23,11 +23,8 @@ struct OtherScreens: View {
                     Text("利用方法")
                 }
                 
-                NavigationLink {
-                    PrivacyPolicyView()
-                } label: {
-                    Text("プライバシーポリシ")
-                }
+                Link("プライバシーポリシ", destination: URL(string: "https://www.appsoftlab.com/?p=15")!
+                )
 
                 NavigationLink {
                     MailView(isMailScreenShowing: $isShowingMaileView)

@@ -41,12 +41,30 @@ class DBModelView: ObservableObject{
         try? dbRef.write{
             dbRef.add(recordWordListModel)
         }
-        fetchData()
+        //fetchData()
+    }
+    
+    func update(itemID: Int) {
+      objectWillChange.send()
+
+      do {
+        let realm = try Realm()
+        try realm.write {
+          realm.create(RecordWordListModel.self,
+                       value: ["id": itemID,
+                               "recordWord": recordWord,
+                               "memo": memo],
+                       update: .modified)
+        }
+      } catch let error {
+        print(error.localizedDescription)
+      }
     }
     
     /// 単語削除処理
     /// - Parameter presentWord: 削除する単語
     func deleteData(deleteWord: String){
+        objectWillChange.send()
         
         let realm = try! Realm()
         let resultsDeleteWord = realm.objects(RecordWordListModel.self).filter("recordWord = '\(deleteWord)'")

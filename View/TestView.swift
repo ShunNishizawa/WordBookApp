@@ -12,9 +12,11 @@ struct TestView: View {
     @State var numberOfQuestions: Int //出題数
     @State var show = true
     @StateObject var dbModelView = DBModelView()
-    @State private var showAnswerView = false //解答画面出力フラグ
+   // @State private var showAnswerView = false //解答画面出力フラグ
     let realm = try! Realm()
     private let questionWord = DBModelView().getWord() //出題単語
+    @State private var isActive = false
+    @Binding var isTestSettingViewActive: Bool
     
     var body: some View {
             VStack(alignment: .center){
@@ -27,9 +29,9 @@ struct TestView: View {
                         Text(questionWord)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .foregroundColor(.red))
+                                .foregroundColor(.black))
                 
-                NavigationLink(destination: AnswerView(numberOfQuestions: numberOfQuestions, questionWord: questionWord)) {
+                NavigationLink(destination: AnswerView(numberOfQuestions: numberOfQuestions, questionWord: questionWord, isTestSettingView: $isTestSettingViewActive)) {
                     Text("解答確認")
                         .fontWeight(.semibold)
                         .frame(width: 160, height: 48)
